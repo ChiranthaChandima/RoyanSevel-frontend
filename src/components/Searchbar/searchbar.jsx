@@ -12,23 +12,32 @@ function Searchbar(){
     });
 
     const switchType = (val) => {
-        setQuery((prev) => ({ ...prev, type: val}))
+        setQuery((prev) => ({ ...prev, type: val}));
     }
 
   return (
     <div className='searchbar'>
         <div className="type">
-            <button>Buy</button>
-            <button>Rent</button>
+            {
+                types.map((type) => (
+                    <button
+                    key={type}
+                    onClick={() => switchType(type)}
+                    className={query.type === type ? "active" : ""}
+                    >
+                        {type}
+                    </button>
+                ))
+            }
         </div>
         <form action="">
             <input type="text" name='location' placeholder='cityloaction' />
             <input type="number" name='minprice' min={0} max={1000000} placeholder='minprice' />
             <input type="number" name='maxprice' min={0} max={1000000} placeholder='maxprice' />
-        </form>
-        <button>
+            <button>
             <img src="./search.png" alt="" />
-        </button>
+             </button>
+        </form>
     </div>
   )
 }
